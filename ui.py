@@ -1,3 +1,5 @@
+# ui.py
+
 import streamlit as st
 import matplotlib.pyplot as plt
 from scan import run_scan
@@ -11,7 +13,7 @@ def run_ui():
         initial_sidebar_state="expanded"
     )
 
-    # === Theme: Material Design ===
+    # === Theme: Material Design + White Labels ===
     st.markdown(
         """
         <style>
@@ -19,11 +21,13 @@ def run_ui():
             background-color: #F5F5F5 !important;
             color: #212121 !important;
         }
-        .stTextInput > label, .stNumberInput > label {
-            color: #212121 !important;
-        }
-        .stSelectbox > label, .stRadio > label {
-            color: #212121 !important;
+        /* White labels for input components */
+        .stTextInput > label,
+        .stNumberInput > label,
+        .stSelectbox > label,
+        .stRadio > label {
+            color: white !important;
+            font-weight: bold;
         }
         .stButton>button {
             background-color: #6200EE !important;
@@ -36,7 +40,7 @@ def run_ui():
             background-color: #3700B3 !important;
         }
         .stSlider > label {
-            color: #212121 !important;
+            color: white !important;
         }
         .stTextInput, .stNumberInput, .stSelectbox, .stRadio {
             border-radius: 4px;
@@ -53,7 +57,7 @@ def run_ui():
     )
 
     # === Title & Description ===
-    st.title("🧠 Disk Scheduling Algorithms")
+    st.title("💾 Disk Scheduling Algorithms")
     st.write("Visualize **SCAN** and **C-SCAN** disk scheduling with accurate head movement tracking.")
 
     # === Inputs ===
