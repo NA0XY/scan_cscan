@@ -13,47 +13,45 @@ def run_ui():
         initial_sidebar_state="expanded"
     )
 
-    # === Theme: Material Design + White Labels ===
+    # === Custom CSS for white input labels ===
     st.markdown(
         """
         <style>
-        body, .css-1d391kg, .css-16huue1 {
-            background-color: #F5F5F5 !important;
-            color: #212121 !important;
+        /* Set the background for the entire app */
+        body {
+            background-color: #F5F5F5;
         }
-        /* White labels for input components */
-        .stTextInput > label,
-        .stNumberInput > label,
-        .stSelectbox > label,
-        .stRadio > label {
+
+        /* Make all input field labels white */
+        label {
             color: white !important;
             font-weight: bold;
         }
+
+        /* Optional: style buttons */
         .stButton>button {
             background-color: #6200EE !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            color: white !important;
             border-radius: 4px;
             font-weight: 500;
         }
         .stButton>button:hover {
             background-color: #3700B3 !important;
         }
-        .stSlider > label {
-            color: white !important;
-        }
+
+        /* Optional: rounded corners and shadows on inputs */
         .stTextInput, .stNumberInput, .stSelectbox, .stRadio {
             border-radius: 4px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .stTextInput input, .stNumberInput input, .stSelectbox select, .stRadio label {
-            border-radius: 4px;
+
+        .stTextInput input, .stNumberInput input, .stSelectbox select {
             padding: 10px;
             font-size: 16px;
         }
         </style>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
     # === Title & Description ===
@@ -108,7 +106,6 @@ def run_ui():
         if algo == "SCAN":
             sequence, movement = run_scan(requests, start, direction)
         else:
-            # for C-SCAN, pass max_cylinder - 1 as the highest index
             sequence, movement = run_cscan(requests, start, direction, max_cylinder - 1)
 
         # === Results ===
