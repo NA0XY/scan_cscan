@@ -1,5 +1,4 @@
-import ui
+from ui import run_ui
 
 if __name__ == "__main__":
-    ui.run_disk_ui()
-
+    run_ui()
