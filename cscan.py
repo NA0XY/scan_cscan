@@ -1,35 +1,50 @@
-def run_cscan(requests, start, max_cylinder=199):
+# cscan.py
+
+def run_cscan(requests, start, direction='right', max_cylinder=199):
     """
-    Perform CSCAN disk scheduling.
+    Perform C-SCAN disk scheduling.
 
     Parameters:
-    - requests: list of disk track numbers
+    - requests: list of disk track numbers (integers)
     - start: initial head position
-    - max_cylinder: max track number (default 199)
+    - direction: 'right' or 'left'
+    - max_cylinder: highest track number on the disk
 
     Returns:
-    - sequence: list of tracks in the order they are serviced
+    - sequence: list of serviced disk tracks
     - movement: total head movement
     """
     if not requests:
         return [], 0
 
-    sorted_requests = sorted(requests)
-    right = [r for r in sorted_requests if r >= start]
-    left = [r for r in sorted_requests if r < start]
+    # Remove duplicates and sort
+    requests = sorted(set(requests))
+    left  = [r for r in requests if r < start]
+    right = [r for r in requests if r >= start]
 
     sequence = []
-    sequence.extend(right)
-    if right:
-        sequence.append(max_cylinder)  # Jump to max
-    if left:
-        sequence.append(0)             # Wrap around
+    if direction == 'right':
+        sequence.extend(right)
+        if right and right[-1] != max_cylinder:
+            sequence.append(max_cylinder)  # Go to end (but don't show it in sequence)
+        sequence.append(0)                 # Wrap to start (but don't show it)
         sequence.extend(left)
+    elif direction == 'left':
+        sequence.extend(reversed(left))
+        if left and left[0] != 0:
+            sequence.append(0)             # Go to start (but don't show it)
+        sequence.append(max_cylinder)      # Wrap to end (but don't show it)
+        sequence.extend(reversed(right))
+    else:
+        raise ValueError("Direction must be 'right' or 'left'")
+
+    # Clean up the sequence to remove 0 and max_cylinder
+    sequence = [track for track in sequence if track != 0 and track != max_cylinder]
 
     movement = 0
-    current = start
+    pos = start
     for track in sequence:
-        movement += abs(track - current)
-        current = track
+        movement += abs(track - pos)
+        pos = track
 
     return sequence, movement
