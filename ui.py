@@ -1,5 +1,3 @@
-# ui.py
-
 import streamlit as st
 import matplotlib.pyplot as plt
 from scan import run_scan
@@ -45,6 +43,7 @@ def run_ui():
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .stTextInput input, .stNumberInput input, .stSelectbox select, .stRadio label {
+            background-color: white !important;
             border-radius: 4px;
             padding: 10px;
             font-size: 16px;
