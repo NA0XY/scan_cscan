@@ -8,7 +8,7 @@ from cscan import run_cscan
 def run_ui():
     # Page config
     st.set_page_config(
-        page_title="Disk Scheduling Visualizer",
+        page_title=" Visualizer",
         layout="centered",
         initial_sidebar_state="expanded"
     )
