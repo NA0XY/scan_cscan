@@ -55,7 +55,7 @@ def run_ui():
     )
 
     # === Title & Description ===
-    st.title("💾 Disk Scheduling Algorithms meow")
+    st.title("💾 Disk Scheduling Algorithms")
     st.write("Visualize **SCAN** and **C-SCAN** disk scheduling with accurate head movement tracking.")
 
     # === Inputs ===
