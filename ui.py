@@ -8,7 +8,7 @@ from cscan import run_cscan
 def run_ui():
     # Page config
     st.set_page_config(
-        page_title=" Visualizer",
+        page_title=" Disk Scheduling Visualizer",
         layout="centered",
         initial_sidebar_state="expanded"
     )
@@ -55,7 +55,7 @@ def run_ui():
     )
 
     # === Title & Description ===
-    st.title("💾 Disk Scheduling Algorithms")
+    st.title("💾 Disk Scheduling Algorithms meow")
     st.write("Visualize **SCAN** and **C-SCAN** disk scheduling with accurate head movement tracking.")
 
     # === Inputs ===
